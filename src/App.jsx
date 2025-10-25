@@ -1,17 +1,22 @@
-import "./App.css"
+import { useState } from 'react'
+import Quiz from './components/Quiz'
+import Celebration from './components/Celebration'
+import Stars from './components/Stars'
+import './App.css'
 
 function App() {
+  const [showCelebration, setShowCelebration] = useState(false)
+
   return (
     <>
-    <div className="container">
-      <div className="hello-container">
-        <h1>Hello World!</h1>
-      </div>
-      <div className="app-container">
-        <p>Mãe eu tenho um site!</p>
-      </div>
-    </div>
+      <Stars />
+      {!showCelebration ? (
+        <Quiz onComplete={() => setShowCelebration(true)} />
+      ) : (
+        <Celebration />
+      )}
     </>
   )
 }
-export default App;
+
+export default App
