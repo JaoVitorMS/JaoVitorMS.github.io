@@ -39,14 +39,13 @@ export const quizData = [
     correct: 2
   },
   {
-    question: "Você é...",
+    question: "Giulia tu está vendo isso no seu aniversário ou antes?",
     options: [
-      "Maravilhosa",
-      "Inspiradora",
-      "Iluminada",
-      "Tudo isso e mais"
+      "Antes",
+      "No meu aniversário",
+      "Não tenho provas mas também não tenho dúvidas",
     ],
-    correct: 3
+    correct: 2
   }
 ]
 
