@@ -6,30 +6,25 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: "Georgia", serif;
+  background: #0f0f1e;
   min-height: 100vh;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 @supports (-webkit-touch-callout: none) {
   body {
     min-height: -webkit-fill-available;
   }
-  
+
   #root {
     min-height: -webkit-fill-available;
   }
