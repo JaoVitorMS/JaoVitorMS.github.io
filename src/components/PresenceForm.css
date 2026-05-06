@@ -3,17 +3,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 16px;
+  margin: 20px auto;
+  max-width: 950px;
+}
+
+.presence-form-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border: 1px solid rgba(51, 102, 255, 0.2);
 }
 
 .presence-iframe {
   width: 100%;
-  max-width: 900px;
-  height: 70vh;
-  border: 0;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  height: 65vh;
+  border: none;
+  display: block;
 }
 
 .presence-fallback {
@@ -22,18 +30,28 @@
   gap: 8px;
   background: linear-gradient(90deg, #3366ff, #00c6ff);
   color: white;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(51, 102, 255, 0.4);
 }
 
 .presence-fallback:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(51, 102, 255, 0.6);
 }
 
 @media (max-width: 640px) {
   .presence-iframe {
-    height: 56vh;
+    height: 50vh;
+  }
+
+  .presence-form-wrapper {
+    gap: 12px;
+    margin: 12px 8px;
   }
 }
