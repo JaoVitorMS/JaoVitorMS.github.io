@@ -1,9 +1,9 @@
-import GameList from './components/GameList';
+import PresenceForm from './components/PresenceForm';
 
 function App() {
   return (
     <div>
-      <GameList />
+      <PresenceForm />
     </div>
   );
 }
