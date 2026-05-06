@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
-import './GameList.css';
+import { useState, useEffect } from "react";
+import "./GameList.css";
 
 export default function GameList() {
   const [players, setPlayers] = useState([]);
-  const [input, setInput] = useState('');
-  const STORAGE_KEY = 'gamePlayerList';
+  const [input, setInput] = useState("");
+  const STORAGE_KEY = "gamePlayerList";
   // Optional: set your public Google Sheet ID here to load players from a sheet.
   // Make sure the sheet is published to web or is publicly viewable.
   // Example: const SHEET_ID = '1aBcD...';
-  const SHEET_ID = '';
+  // Provided by user:
+  const SHEET_ID = "1vU_mmjVqvlFky3kzztEvH21gZXnpxniQ1FxiJICg8mI";
+  const SHEET_GID = "613547221"; // specific sheet tab
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -21,26 +23,28 @@ export default function GameList() {
     if (!SHEET_ID) return;
     const load = async () => {
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
         const res = await fetch(url);
         const text = await res.text();
         const jsonText = text.match(/setResponse\((.*)\);/s)?.[1];
         if (!jsonText) return;
         const data = JSON.parse(jsonText);
         const rows = data.table.rows || [];
-        const sheetPlayers = rows.map(r => ({
-          name: (r.c[0] && r.c[0].v) || '',
-          id: Date.now() + Math.random()
-        })).filter(p => p.name);
+        const sheetPlayers = rows
+          .map((r) => ({
+            name: (r.c[0] && r.c[0].v) || "",
+            id: Date.now() + Math.random(),
+          }))
+          .filter((p) => p.name);
         if (sheetPlayers.length) setPlayers(sheetPlayers);
       } catch (err) {
         // silent fail — keep local players
-        console.error('Erro ao carregar sheet:', err);
+        console.error("Erro ao carregar sheet:", err);
       }
     };
 
     load();
-  }, [SHEET_ID]);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(players));
@@ -51,27 +55,27 @@ export default function GameList() {
 
     if (!name) return;
 
-    if (players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-      alert('Este jogador já está na lista!');
+    if (players.some((p) => p.name.toLowerCase() === name.toLowerCase())) {
+      alert("Este jogador já está na lista!");
       return;
     }
 
     setPlayers([...players, { name, id: Date.now() }]);
-    setInput('');
+    setInput("");
   };
 
   const removePlayer = (id) => {
-    setPlayers(players.filter(p => p.id !== id));
+    setPlayers(players.filter((p) => p.id !== id));
   };
 
   const clearAll = () => {
-    if (confirm('Tem certeza que quer limpar toda a lista?')) {
+    if (confirm("Tem certeza que quer limpar toda a lista?")) {
       setPlayers([]);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       addPlayer();
     }
   };
@@ -108,13 +112,12 @@ export default function GameList() {
           </div>
 
           <div className="game-list-list">
-            {players.length === 0 ? (
+            {players.length === 0 ?
               <div className="game-list-empty-state">
                 <div className="game-list-empty-state-icon">📋</div>
                 <div className="game-list-empty-state-text">Lista vazia</div>
               </div>
-            ) : (
-              players.map((player, index) => (
+            : players.map((player, index) => (
                 <div key={player.id} className="game-list-item">
                   <span className="game-list-item-index">{index + 1}</span>
                   <span className="game-list-item-name">{player.name}</span>
@@ -126,7 +129,7 @@ export default function GameList() {
                   </button>
                 </div>
               ))
-            )}
+            }
           </div>
 
           <button onClick={clearAll} className="game-list-btn-clear">
