@@ -1,0 +1,39 @@
+/* Styles for the embedded Google Form and fallback button */
+.presence-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.presence-iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 70vh;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.presence-fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #3366ff, #00c6ff);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.presence-fallback:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .presence-iframe {
+    height: 56vh;
+  }
+}

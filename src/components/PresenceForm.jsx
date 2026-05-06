@@ -1,18 +1,26 @@
+import './PresenceForm.css';
+
 function PresenceForm() {
+  const url = "https://docs.google.com/forms/d/e/1FAIpQLSdJmaOF2rFS5T_O4nYXD6md7D2bN3UB_HMrC39wgVvu6eRNlg/viewform";
+
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
-    >
+    <div className="presence-form-wrapper">
       <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSdJmaOF2rFS5T_O4nYXD6md7D2bN3UB_HMrC39wgVvu6eRNlg/viewform?embedded=true"
-        width="640"
-        height="409"
-        frameBorder="0"
-        marginHeight="0"
-        marginWidth="0"
+        className="presence-iframe"
+        src={`${url}?embedded=true`}
+        title="Formulário de presença"
       >
         Carregando…
       </iframe>
+
+      <a
+        className="presence-fallback"
+        href={url}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Abrir formulário em nova aba
+      </a>
     </div>
   );
 }
