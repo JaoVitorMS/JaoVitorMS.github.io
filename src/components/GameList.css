@@ -87,6 +87,74 @@
   border-bottom: 1px solid rgba(162, 123, 255, 0.14);
 }
 
+.game-list-counter-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-list-price-badge {
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.game-list-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.goalie-tag {
+  font-size: 0.65em;
+  background: #ffaa00;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.game-list-item-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.status-tag.paid {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.status-tag.unpaid {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4444;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+.game-list-item.is-paid {
+  border-left-color: #00ff88;
+  background: rgba(0, 255, 136, 0.03);
+}
+
 .game-list-counter-label {
   font-size: 0.85em;
   color: #b9b9cf;

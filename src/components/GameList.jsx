@@ -3,27 +3,37 @@ import PresenceForm from "./PresenceForm";
 import "./GameList.css";
 
 export default function GameList() {
-  const [players, setPlayers] = useState([]);
-  
-  // TODO: Obter informações de dia, hora e preço
-  // Dia: ?
-  // Hora: ?
-  // Preço: ?
   const gameInfo = {
     day: "Sexta-feira 8 de Maio",
     time: "22h30+",
-    price: "R$120 - R$12 se tiver 10 pessoas",
+    totalPrice: 120,
   };
   
   // Provided by user:
   const SHEET_ID = "1vU_mmjVqvlFky3kzztEvH21gZXnpxniQ1FxiJICg8mI";
   const SHEET_GID = "613547221"; // specific sheet tab
 
+  const [players, setPlayers] = useState([]);
+  
+  // Cálculo do preço por pessoa
+  // Goleiros entram no rateio se estiverem na lista. 
+  // O usuário mencionou: "campo goleiro que por enquanto ele ficar como nao, mas se eu mudar ele deve entrar no price total"
+  // Interpretamos que se estiver na lista e for goleiro, por padrão pode não pagar, 
+  // mas se o dono da planilha mudar algo, ele entra.
+  // Para simplificar: Preço Total / (Jogadores que não são goleiros + Goleiros que devem pagar)
+  const nonGoalies = players.filter(p => !p.isGoalie).length;
+  const payingGoalies = players.filter(p => p.isGoalie && p.isPaid).length; // Se o goleiro está marcado como 'Pago', ele entra no rateio
+  
+  const totalPayers = nonGoalies + payingGoalies;
+  const pricePerPlayer = totalPayers > 0 ? (gameInfo.totalPrice / totalPayers).toFixed(2) : 0;
+
   useEffect(() => {
     if (!SHEET_ID) return;
+    
     const load = async () => {
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+        // Cache busting: adicionar timestamp para garantir dados frescos
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}&t=${Date.now()}`;
         const res = await fetch(url);
         const text = await res.text();
         const jsonText = text.match(/setResponse\((.*)\);/s)?.[1];
@@ -33,44 +43,63 @@ export default function GameList() {
         // assumes first column contains player names, second column optional status
         const sheetPlayers = rows
           .map((r) => {
-            // Try to find a valid name (not a Date() and not empty)
+            // Mapping columns:
+            // Column 0: Name (usually)
+            // Column 1+: Looking for specific tags
             let name = "";
-            let status = "";
+            let isGoalie = false;
+            let isPaid = false;
+            let otherStatus = "";
 
-            // Look through columns to find name and status
-            for (let i = 0; i < r.c.length; i++) {
-              const val = (r.c[i] && r.c[i].v) || "";
-
-              // Skip if it's a Date value
-              if (typeof val === "string" && val.startsWith("Date(")) {
-                continue;
-              }
-
-              // Skip empty values
-              if (!val || val.trim() === "") {
-                continue;
-              }
-
-              // First valid non-date value is the name
-              if (!name) {
-                name = String(val).trim();
-              } else if (!status) {
-                // Second valid value is status
-                status = String(val).trim();
+            const values = r.c.map(cell => (cell && cell.v) ? String(cell.v).trim() : "");
+            
+            // Find name (first non-date, non-empty value)
+            for (let val of values) {
+              if (val && !val.startsWith("Date(")) {
+                name = val;
                 break;
               }
             }
 
-            return { name, status, id: name || Math.random() };
+            // Look for Goalie and Paid status in any column
+            values.forEach(val => {
+              const lowerVal = val.toLowerCase();
+              if (lowerVal === "goleiro") {
+                isGoalie = true;
+              }
+              if (lowerVal === "pago") isPaid = true;
+              if (lowerVal === "não-pago" || lowerVal === "nao-pago") isPaid = false;
+            });
+
+            // If we have a second value that isn't name/goalie/paid, use it as status
+            const filteredValues = values.filter(v => v && v !== name && !v.startsWith("Date("));
+            if (filteredValues.length > 0) {
+              otherStatus = filteredValues[0];
+            }
+
+            return { 
+              name, 
+              isGoalie, 
+              isPaid, 
+              status: otherStatus,
+              id: name || Math.random() 
+            };
           })
           .filter((p) => p.name && !p.name.startsWith("Date("));
-        if (sheetPlayers.length) setPlayers(sheetPlayers);
+        
+        if (sheetPlayers.length) {
+          setPlayers(sheetPlayers);
+        }
       } catch (err) {
         console.error("Erro ao carregar sheet:", err);
       }
     };
 
     load();
+
+    // Atualização automática a cada 30 segundos
+    const interval = setInterval(load, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleAddPlayer = (newName) => {
@@ -92,7 +121,8 @@ export default function GameList() {
           <div className="game-info">
             <p className="game-info-label">Dia: <span className="game-info-value">{gameInfo.day}</span></p>
             <p className="game-info-label">Hora: <span className="game-info-value">{gameInfo.time}</span></p>
-            <p className="game-info-label">Preço: <span className="game-info-value">{gameInfo.price}</span></p>
+            <p className="game-info-label">Preço Total: <span className="game-info-value">R${gameInfo.totalPrice}</span></p>
+            <p className="game-info-label">Preço do Goleiro de aluguel: <span className="game-info-value">R${0}</span></p>
           </div>
         </div>
 
@@ -102,8 +132,13 @@ export default function GameList() {
           
           {/* Contador de jogadores */}
           <div className="game-list-counter">
-            <span className="game-list-counter-label">Lista de confirmados:</span>
-            <span className="game-list-counter-value">{players.length}</span>
+            <div className="game-list-counter-info">
+              <span className="game-list-counter-label">Confirmados:</span>
+              <span className="game-list-counter-value">{players.length}</span>
+            </div>
+            <div className="game-list-price-badge">
+              R${pricePerPlayer}/pessoa
+            </div>
           </div>
 
           {/* Lista de jogadores */}
@@ -114,14 +149,26 @@ export default function GameList() {
                 <div className="game-list-empty-state-text">Lista vazia</div>
               </div>
             : players.map((player, index) => (
-                <div key={player.id} className="game-list-item">
+                <div key={player.id} className={`game-list-item ${player.isPaid ? 'is-paid' : ''}`}>
                   <span className="game-list-item-index">{index + 1}</span>
-                  <span className="game-list-item-name">{player.name}</span>
-                  {player.status && (
-                    <span className="game-list-item-status">
-                      {player.status}
+                  <div className="game-list-item-info">
+                    <span className="game-list-item-name">
+                      {player.name}
+                      {player.isGoalie && <span className="goalie-tag">Goleiro</span>}
                     </span>
-                  )}
+                  </div>
+                  <div className="game-list-item-tags">
+                    {player.isPaid ? (
+                      <span className="status-tag paid">Pago</span>
+                    ) : (
+                      <span className="status-tag unpaid">Pendente</span>
+                    )}
+                    {player.status && !player.isPaid && (
+                      <span className="game-list-item-status">
+                        {player.status}
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))
             }
