@@ -73,6 +73,15 @@ export default function GameList() {
     load();
   }, []);
 
+  const handleAddPlayer = (newName) => {
+    const newPlayer = {
+      name: newName,
+      status: "Pendente (atualize para fixar)",
+      id: `temp-${Date.now()}`,
+    };
+    setPlayers((prev) => [...prev, newPlayer]);
+  };
+
   return (
     <div className="game-list-container">
       <div className="game-list-background" />
@@ -89,7 +98,7 @@ export default function GameList() {
 
         <div className="game-list-card">
           {/* Form para adicionar presença */}
-          <PresenceForm />
+          <PresenceForm onSuccess={handleAddPlayer} />
           
           {/* Contador de jogadores */}
           <div className="game-list-counter">

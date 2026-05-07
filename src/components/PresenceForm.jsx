@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./PresenceForm.css";
 
-function PresenceForm() {
+function PresenceForm({ onSuccess }) {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -30,6 +30,9 @@ function PresenceForm() {
       });
 
       setMessage("✅ Presença confirmada!");
+      if (onSuccess) {
+        onSuccess(name);
+      }
       setName("");
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
