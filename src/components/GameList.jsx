@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
+import PresenceForm from "./PresenceForm";
 import "./GameList.css";
 
 export default function GameList() {
   const [players, setPlayers] = useState([]);
+  
+  // TODO: Obter informações de dia, hora e preço
+  // Dia: ?
+  // Hora: ?
+  // Preço: ?
+  const gameInfo = {
+    day: "TODO: Adicionar dia",
+    time: "TODO: Adicionar hora",
+    price: "TODO: Adicionar preço",
+  };
+  
   // Provided by user:
   const SHEET_ID = "1vU_mmjVqvlFky3kzztEvH21gZXnpxniQ1FxiJICg8mI";
   const SHEET_GID = "613547221"; // specific sheet tab
@@ -68,15 +80,24 @@ export default function GameList() {
       <div className="game-list-content">
         <div className="game-list-header">
           <h1>Lista de Jogo</h1>
-          <p>Jogadores confirmados</p>
+          <div className="game-info">
+            <p className="game-info-label">Dia: <span className="game-info-value">{gameInfo.day}</span></p>
+            <p className="game-info-label">Hora: <span className="game-info-value">{gameInfo.time}</span></p>
+            <p className="game-info-label">Preço: <span className="game-info-value">{gameInfo.price}</span></p>
+          </div>
         </div>
 
         <div className="game-list-card">
+          {/* Form para adicionar presença */}
+          <PresenceForm />
+          
+          {/* Contador de jogadores */}
           <div className="game-list-counter">
             <span className="game-list-counter-label">Jogadores na fila:</span>
             <span className="game-list-counter-value">{players.length}</span>
           </div>
 
+          {/* Lista de jogadores */}
           <div className="game-list-list">
             {players.length === 0 ?
               <div className="game-list-empty-state">
