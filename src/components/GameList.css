@@ -1,308 +1,253 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap");
 
 .game-list-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d1b2a 100%);
-    color: #e0e0e0;
-    font-family: 'IBM Plex Mono', monospace;
-    position: relative;
-    overflow-x: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  border-top: none;
+  min-width: 0;
 }
 
 .game-list-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(102, 51, 153, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(30, 144, 255, 0.15) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
+  display: none;
 }
 
 .game-list-content {
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
 .game-list-header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: gameListSlideDown 0.8s ease-out;
+  display: none;
+  padding: 16px 18px 10px;
+  border-bottom: 1px solid rgba(162, 123, 255, 0.14);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.08),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 .game-list-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5em;
-    font-weight: 900;
-    color: #00ff88;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-    word-spacing: 100vw;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #f4f4f4;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .game-list-header p {
-    color: #888;
-    font-size: 0.9em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  color: #b9b9cf;
+  font-size: 0.85em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .game-list-card {
-    background: rgba(20, 25, 45, 0.8);
-    border: 1.5px solid rgba(0, 255, 136, 0.3);
-    border-radius: 8px;
-    padding: 30px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    animation: gameListFadeIn 0.8s ease-out 0.2s both;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .game-list-input-group {
-    display: none;
-}
-
-.game-list-input {
-    flex: 1;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1.5px solid rgba(0, 255, 136, 0.2);
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.95em;
-    transition: all 0.3s ease;
-}
-
-.game-list-input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(0, 255, 136, 0.6);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-}
-
-.game-list-input::placeholder {
-    color: #666;
-}
-
-.game-list-btn-add {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #00ff88 0%, #00dd77 100%);
-    border: none;
-    border-radius: 6px;
-    color: #0a0e27;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
-}
-
-.game-list-btn-add:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(0, 255, 136, 0.5);
-}
-
-.game-list-btn-add:active {
-    transform: translateY(0);
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 .game-list-counter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(162, 123, 255, 0.14);
 }
 
 .game-list-counter-label {
-    font-size: 0.85em;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-size: 0.85em;
+  color: #b9b9cf;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .game-list-counter-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
-    color: #00ff88;
-    font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  font-size: 2em;
+  color: #00ff88;
+  font-weight: 700;
 }
 
 .game-list-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .game-list-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 255, 136, 0.15);
-    border-radius: 6px;
-    animation: gameListSlideIn 0.4s ease-out;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.game-list-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, #00ff88, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-left: 4px solid #00ff88;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .game-list-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(0, 255, 136, 0.4);
-    transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 255, 136, 0.4);
+  border-left-color: #00ff88;
+  transform: translateX(5px);
 }
 
 .game-list-item-index {
-    font-family: 'Orbitron', sans-serif;
-    color: #00ff88;
-    font-weight: 700;
-    min-width: 30px;
-    text-align: center;
+  font-family: "Orbitron", sans-serif;
+  color: #00ff88;
+  font-weight: 700;
+  min-width: 30px;
+  text-align: center;
+  font-size: 0.9em;
 }
 
 .game-list-item-name {
-    flex: 1;
-    margin-left: 15px;
-    color: #e0e0e0;
-    font-size: 0.95em;
+  flex: 1;
+  margin-left: 15px;
+  color: #e0e0e0;
+  font-size: 0.95em;
+  font-weight: 500;
 }
 
 .game-list-item-status {
-    margin-left: auto;
-    padding: 4px 12px;
-    background: rgba(0, 255, 136, 0.1);
-    border-radius: 4px;
-    color: #00ff88;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  margin-left: auto;
+  padding: 4px 10px;
+  background: rgba(0, 255, 136, 0.1);
+  border-radius: 999px;
+  color: #00ff88;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .game-list-btn-remove {
-    display: none;
+  display: block;
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.game-list-btn-remove:hover {
+  background: #ff6666;
 }
 
 .game-list-empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #666;
+  text-align: center;
+  padding: 40px 20px;
+  color: #8f8fb0;
 }
 
 .game-list-empty-state-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-    opacity: 0.5;
+  font-size: 3em;
+  margin-bottom: 15px;
+  opacity: 0.5;
 }
 
 .game-list-empty-state-text {
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-size: 0.9em;
+  color: #a7a7c1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .game-list-btn-clear {
-    display: none;
+  display: block;
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.3s ease;
 }
 
-.game-list-btn-add-form {
-    display: block;
-    width: 100%;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, #3366ff, #00c6ff);
-    border: none;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(51, 102, 255, 0.4);
-    text-align: center;
-}
-
-.game-list-btn-add-form:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(51, 102, 255, 0.6);
+.game-list-btn-clear:hover {
+  background: #ff6666;
 }
 
 @keyframes gameListSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes gameListFadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes gameListSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@media (max-width: 600px) {
-    .game-list-header h1 {
-        font-size: 2em;
-    }
+@media (max-width: 768px) {
+  .game-list-container {
+    min-width: auto;
+    border-top: none;
+  }
 
-    .game-list-card {
-        padding: 20px;
-    }
+  .game-list-header h1 {
+    font-size: 1.2em;
+  }
 
-    .game-list-input-group {
-        flex-direction: column;
-    }
-
-    .game-list-btn-add {
-        width: 100%;
-    }
+  .game-list-card {
+    padding: 0;
+  }
 }

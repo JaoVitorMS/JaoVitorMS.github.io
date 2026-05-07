@@ -1,78 +1,75 @@
 .app-container {
+  width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-  color: #fff;
-}
-
-.app-header {
-  padding: 32px 20px;
-  text-align: center;
-  border-bottom: 2px solid rgba(51, 102, 255, 0.3);
-}
-
-.app-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 8px;
-  background: linear-gradient(90deg, #3366ff, #00c6ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.app-header p {
-  font-size: 1rem;
-  color: #aaa;
-}
-
-.app-nav {
-  display: flex;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d1b2a 100%);
+  color: #e0e0e0;
+  font-family: "IBM Plex Mono", monospace;
   padding: 20px;
-  flex-wrap: wrap;
+  position: relative;
+  overflow-x: hidden;
 }
 
-.nav-btn {
-  padding: 10px 20px;
-  border: 2px solid rgba(51, 102, 255, 0.5);
-  background: transparent;
-  color: #3366ff;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(102, 51, 153, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(30, 144, 255, 0.15) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
 }
 
-.nav-btn:hover {
-  background: rgba(51, 102, 255, 0.1);
-  border-color: #3366ff;
-  transform: translateY(-2px);
-}
-
-.nav-btn.active {
-  background: linear-gradient(90deg, #3366ff, #00c6ff);
-  border-color: #00c6ff;
-  color: white;
-}
-
-.app-main {
+.app-content {
   flex: 1;
-  padding: 20px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  background: rgba(20, 25, 45, 0.8);
+  border: 1.5px solid rgba(0, 255, 136, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+  animation: gameListFadeIn 0.8s ease-out 0.2s both;
 }
 
 @media (max-width: 768px) {
-  .app-header h1 {
-    font-size: 1.8rem;
+  .app-container {
+    padding: 10px;
   }
 
-  .app-nav {
-    flex-direction: column;
+  .app-content {
+    border-radius: 8px;
   }
+}
 
-  .nav-btn {
-    width: 100%;
+@keyframes gameListFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
