@@ -57,11 +57,14 @@
 
 @media (max-width: 768px) {
   .app-container {
-    padding: 10px;
+    padding: 0;
   }
 
   .app-content {
-    border-radius: 8px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    max-width: 100%;
   }
 }
 

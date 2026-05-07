@@ -10,9 +10,9 @@ export default function GameList() {
   // Hora: ?
   // Preço: ?
   const gameInfo = {
-    day: "TODO: Adicionar dia",
-    time: "TODO: Adicionar hora",
-    price: "TODO: Adicionar preço",
+    day: "Sexta-feira 8 de Maio",
+    time: "22h30+",
+    price: "R$120 - R$12 se tiver 10 pessoas",
   };
   
   // Provided by user:
@@ -102,7 +102,7 @@ export default function GameList() {
           
           {/* Contador de jogadores */}
           <div className="game-list-counter">
-            <span className="game-list-counter-label">Jogadores na fila:</span>
+            <span className="game-list-counter-label">Lista de confirmados:</span>
             <span className="game-list-counter-value">{players.length}</span>
           </div>
 

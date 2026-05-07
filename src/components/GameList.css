@@ -255,7 +255,11 @@
     font-size: 1.2em;
   }
 
+  .game-list-header {
+    padding: 20px 15px;
+  }
+
   .game-list-card {
-    padding: 0;
+    padding: 15px;
   }
 }
