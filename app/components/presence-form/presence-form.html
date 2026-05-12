@@ -1,0 +1,34 @@
+<div class="presence-form-wrapper">
+  <div class="presence-form-container">
+    <div class="presence-form-header">
+      <h2>Confirmar Presença</h2>
+    </div>
+    <div class="presence-form">
+      <div class="form-group">
+        <label for="name">Seu Nome *</label>
+        <input
+          id="name"
+          type="text"
+          [value]="name()"
+          (input)="onNameChange($any($event.target).value)"
+          placeholder="Digite seu nome"
+          [disabled]="loading()"
+          class="form-input"
+        />
+      </div>
+
+      <button
+        type="button"
+        [disabled]="loading()"
+        class="form-submit"
+        (click)="handleSubmit()"
+      >
+        {{ loading() ? 'Enviando...' : '⚽ Enviar' }}
+      </button>
+
+      @if (message()) {
+        <div class="form-message">{{ message() }}</div>
+      }
+    </div>
+  </div>
+</div>

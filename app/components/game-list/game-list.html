@@ -1,0 +1,67 @@
+<div class="game-list-container">
+  <div class="game-list-background"></div>
+
+  <div class="game-list-content">
+    <header class="game-list-header">
+      <h1>Lista de Jogo</h1>
+      <div class="game-info">
+        <p class="game-info-label">Dia: <span class="game-info-value">{{ gameInfo.day }}</span></p>
+        <p class="game-info-label">Hora: <span class="game-info-value">{{ gameInfo.time }}</span></p>
+        <p class="game-info-label">Local: <span class="game-info-value">{{ gameInfo.local }}</span></p>
+        <p class="game-info-label">Tipo de quadra: <span class="game-info-value">{{ gameInfo.quadra }}</span></p>
+        <p class="game-info-label">Preço Total: <span class="game-info-value">R${{ gameInfo.totalPrice }}</span></p>
+        @if (gameInfo.hiredGoaliePrice > 0) {
+          <p class="game-info-label">Goleiro de aluguel: <span class="game-info-value">R${{ gameInfo.hiredGoaliePrice }}</span></p>
+        }
+      </div>
+
+      <div class="game-list-sidebar-action">
+        <app-presence-form (success)="handleAddPlayer($event)"></app-presence-form>
+
+        <div class="game-list-counter">
+          <div class="game-list-counter-info">
+            <span class="game-list-counter-label">Confirmados:</span>
+            <span class="game-list-counter-value">{{ totalPlayersCount() }}</span>
+          </div>
+          <div class="game-list-price-badge">
+            R${{ pricePerPlayer() }}/pessoa
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="game-list-card">
+      <section class="game-list-list-column">
+        <div class="game-list-list">
+          @if (players().length === 0) {
+            <div class="game-list-empty-state">
+              <div class="game-list-empty-state-icon">📋</div>
+              <div class="game-list-empty-state-text">Lista vazia</div>
+            </div>
+          } @else {
+            <div class="game-list-grid">
+              @for (player of players(); track player.id; let i = $index) {
+                <div class="game-list-item" [class.is-paid]="player.isPaid">
+                  <span class="game-list-item-index">{{ i + 1 }}</span>
+                  <div class="game-list-item-info">
+                    <span class="game-list-item-name">{{ player.name }}</span>
+                  </div>
+                  <div class="game-list-item-tags">
+                    @if (player.isPaid) {
+                      <span class="status-tag paid">Pago</span>
+                    } @else {
+                      <span class="status-tag unpaid">Pendente</span>
+                    }
+                    @if (player.status && !player.isPaid) {
+                      <span class="game-list-item-status">{{ player.status }}</span>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

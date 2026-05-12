@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +16,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
+app-root {
+  display: block;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -25,7 +28,7 @@ body {
     min-height: -webkit-fill-available;
   }
 
-  #root {
+  app-root {
     min-height: -webkit-fill-available;
   }
 }
