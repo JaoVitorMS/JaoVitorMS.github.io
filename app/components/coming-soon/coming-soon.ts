@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './coming-soon.html',
   styleUrl: './coming-soon.css',
 })
-export class ComingSoon {}
+export class ComingSoonComponent {}
