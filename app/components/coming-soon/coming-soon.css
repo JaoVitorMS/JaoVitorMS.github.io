@@ -38,14 +38,14 @@
 
 .status {
   margin-bottom: 12px;
-  font: 700 0.85rem/1 'IBM Plex Mono', monospace;
+  font: 700 0.85rem/1 ui-monospace, 'SFMono-Regular', 'Cascadia Mono', monospace;
   letter-spacing: 0.18em;
   color: #7ac4ff;
 }
 
 .panel h1 {
   margin-bottom: 16px;
-  font: 700 clamp(1.65rem, 4vw, 2.6rem) / 1.25 'Space Grotesk', system-ui, sans-serif;
+  font: 700 clamp(1.65rem, 4vw, 2.6rem) / 1.25 system-ui, sans-serif;
 }
 
 .subtitle {
@@ -55,7 +55,7 @@
 }
 
 .loading {
-  font: 600 1rem/1 'IBM Plex Mono', monospace;
+  font: 600 1rem/1 ui-monospace, 'SFMono-Regular', 'Cascadia Mono', monospace;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #9fffe4;
