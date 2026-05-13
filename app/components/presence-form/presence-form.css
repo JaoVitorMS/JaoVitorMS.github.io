@@ -99,13 +99,13 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 3px 3px rgba(0, 255, 136, 0.3);
   font-family: "Orbitron", sans-serif;
 }
 
 .form-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(0, 255, 136, 0.5);
+  box-shadow: 0 4px 3px rgba(0, 255, 136, 0.5);
 }
 
 .form-submit:disabled {

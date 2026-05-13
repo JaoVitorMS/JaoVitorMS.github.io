@@ -1,0 +1,39 @@
+<div class="sorting-teams-container">
+  <div class="sorting-teams-header">
+    <h1>Organizar Times</h1>
+  </div>
+
+  <div class="sorting-teams-content">
+    <!-- TIME A -->
+    <div class="team">
+      <h2>Time A ({{ teamA().length }})</h2>
+      <div class="players-list">
+        @if (teamA().length > 0) {
+          @for (p of teamA(); track p.id) {
+            <div class="player">
+              <h3>{{ p.name }}</h3>
+            </div>
+          }
+        } @else {
+          <div class="team-empty">Sem jogadores</div>
+        }
+      </div>
+    </div>
+
+    <!-- TIME B -->
+    <div class="team">
+      <h2>Time B ({{ teamB().length }})</h2>
+      <div class="players-list">
+        @if (teamB().length > 0) {
+          @for (p of teamB(); track p.id) {
+            <div class="player">
+              <h3>{{ p.name }}</h3>
+            </div>
+          }
+        } @else {
+          <div class="team-empty">Sem jogadores</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

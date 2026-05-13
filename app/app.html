@@ -1,9 +1,9 @@
-<div class="app-container" [class.is-coming-soon]="siteMode === 'coming-soon'">
-  <div class="app-content" [class.is-coming-soon]="siteMode === 'coming-soon'">
-    @if (siteMode === 'coming-soon') {
+<div class="app-container" [class.is-coming-soon]="siteMode() === 'coming-soon'">
+  <div class="app-content" [class.is-coming-soon]="siteMode() === 'coming-soon'">
+    @if (siteMode() === 'coming-soon') {
       <app-coming-soon></app-coming-soon>
     } @else {
-      <app-game-list></app-game-list>
+      <router-outlet></router-outlet>
     }
   </div>
 </div>

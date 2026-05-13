@@ -15,9 +15,9 @@ export class GameListComponent implements OnInit, OnDestroy {
   players = signal<Player[]>([]);
 
   gameInfo = {
-    day: 'Sexta-feira 8 de Maio',
-    time: '22h30+',
-    local: 'Planet Ball',
+    day: 'Sexta-feira 16 de Maio',
+    time: '21h00',
+    local: 'MCM',
     quadra: '5',
     totalPrice: 120,
     hiredGoaliePrice: 0,

@@ -30,3 +30,13 @@ app-root {
     min-height: -webkit-fill-available;
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
+  app-root {
+    overflow: auto;
+  }
+}
