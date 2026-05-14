@@ -19,7 +19,7 @@ export class GameListComponent implements OnInit, OnDestroy {
     time: '21h00',
     local: 'MCM',
     quadra: '5',
-    totalPrice: 120,
+    totalPrice: 135,
     hiredGoaliePrice: 0,
   };
 
