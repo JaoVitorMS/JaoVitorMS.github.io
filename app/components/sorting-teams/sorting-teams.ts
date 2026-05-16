@@ -16,7 +16,7 @@ export class SortingTeams implements OnInit, OnDestroy {
   teamB = signal<Player[]>([]);
 
   // CONFIGURE AQUI: Nomes dos goleiros que devem ser separados
-  private readonly GOLEIROS = ["Goleiro 1", "Goleiro 2"];
+  private readonly GOLEIROS = ["Dindo Pedro", "Goleiro 2"];
 
   // CONFIGURE AQUI: ajustes manuais por nome (troque quando precisar)
   private readonly MANUAL_TEAM_A = ["Jogador A"];
